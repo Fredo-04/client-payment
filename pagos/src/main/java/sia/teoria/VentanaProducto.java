@@ -1,12 +1,19 @@
-import javax.swing.*;
-import java.awt.*;
+package sia.teoria;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class VentanaProducto extends JFrame {
-    private JTextField txtCodigo;
-    private JLabel lblResultado;
-    private JButton btnValidar, btnAñadir;
+    private final JTextField txtCodigo;
+    private final JLabel lblResultado;
+    private final JButton btnValidar;
+    private final JButton btnAñadir;
 
     public VentanaProducto() {
         setTitle("Validación de Producto");
@@ -34,18 +41,12 @@ public class VentanaProducto extends JFrame {
 
         add(panel);
 
-        btnValidar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                validarProducto();
-            }
+        btnValidar.addActionListener((ActionEvent e) -> {
+            validarProducto();
         });
 
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                añadirProducto();
-            }
+        btnAñadir.addActionListener((ActionEvent e) -> {
+            añadirProducto();
         });
     }
 

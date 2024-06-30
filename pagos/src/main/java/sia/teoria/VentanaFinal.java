@@ -1,12 +1,18 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package sia.teoria;
+
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class VentanaFinal extends JFrame {
-    private String tipoComprobante;
-    private JTextField txtNumeroDocumento;
-    private JButton btnGenerar;
+    private final String tipoComprobante;
+    private final JTextField txtNumeroDocumento;
+    private final JButton btnGenerar;
 
     public VentanaFinal(String tipo) {
         this.tipoComprobante = tipo;
@@ -28,18 +34,14 @@ public class VentanaFinal extends JFrame {
 
         add(panel);
 
-        btnGenerar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                generarPDF();
-            }
-        });
+        // Usando lambda para el ActionListener del botón
+        btnGenerar.addActionListener(e -> generarPDF());
     }
 
     private void generarPDF() {
-        // Aquí iría la lógica para generar el PDF usando una librería como iText
         String numeroDocumento = txtNumeroDocumento.getText();
-        GenerarPDF.generar(tipoComprobante, numeroDocumento);
+        
+        GenerarPDFBox.generar(tipoComprobante, numeroDocumento);
         JOptionPane.showMessageDialog(this, "Comprobante generado");
     }
 }

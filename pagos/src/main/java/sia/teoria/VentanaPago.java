@@ -1,10 +1,17 @@
-import javax.swing.*;
-import java.awt.*;
+package sia.teoria;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class VentanaPago extends JFrame {
-    private JButton btnEfectivo, btnTarjeta;
+    private final JButton btnEfectivo;
+    private final JButton btnTarjeta;
 
     public VentanaPago() {
         setTitle("Método de Pago");
@@ -23,18 +30,12 @@ public class VentanaPago extends JFrame {
 
         add(panel);
 
-        btnEfectivo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirVentanaComprobante();
-            }
+        btnEfectivo.addActionListener((ActionEvent e) -> {
+            abrirVentanaComprobante();
         });
 
-        btnTarjeta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirVentanaTarjeta();
-            }
+        btnTarjeta.addActionListener((ActionEvent e) -> {
+            abrirVentanaTarjeta();
         });
     }
 
@@ -66,12 +67,9 @@ public class VentanaPago extends JFrame {
 
         ventanaTarjeta.add(panel);
 
-        btnAceptar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirVentanaComprobante();
-                ventanaTarjeta.dispose();
-            }
+        btnAceptar.addActionListener((ActionEvent e) -> {
+            abrirVentanaComprobante();
+            ventanaTarjeta.dispose();
         });
 
         ventanaTarjeta.setVisible(true);

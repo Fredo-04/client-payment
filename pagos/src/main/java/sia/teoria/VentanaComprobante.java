@@ -1,10 +1,15 @@
-import javax.swing.*;
-import java.awt.*;
+package sia.teoria;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 public class VentanaComprobante extends JFrame {
-    private JButton btnBoleta, btnFactura;
+    private final JButton btnBoleta;
+    private final JButton btnFactura;
 
     public VentanaComprobante() {
         setTitle("Selección de Comprobante");
@@ -23,18 +28,12 @@ public class VentanaComprobante extends JFrame {
 
         add(panel);
 
-        btnBoleta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirVentanaFinal("boleta");
-            }
+        btnBoleta.addActionListener((ActionEvent e) -> {
+            abrirVentanaFinal("boleta");
         });
 
-        btnFactura.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirVentanaFinal("factura");
-            }
+        btnFactura.addActionListener((ActionEvent e) -> {
+            abrirVentanaFinal("factura");
         });
     }
 
