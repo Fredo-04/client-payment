@@ -2,9 +2,12 @@ package sia.teoria;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -67,9 +70,34 @@ public class VentanaPago extends JFrame {
 
         ventanaTarjeta.add(panel);
 
+        // Validación para asegurar que solo se ingresen números y que tengan la longitud correcta
+        txtNumeroTarjeta.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtNumeroTarjeta.getText().length() >= 16) {
+                    e.consume(); // Ignorar el evento si no es un número o si ya tiene 16 dígitos
+                }
+            }
+        });
+
+        txtCVV.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtCVV.getText().length() >= 3) {
+                    e.consume(); // Ignorar el evento si no es un número o si ya tiene 3 dígitos
+                }
+            }
+        });
+
         btnAceptar.addActionListener((ActionEvent e) -> {
-            abrirVentanaComprobante();
-            ventanaTarjeta.dispose();
+            if (txtNumeroTarjeta.getText().length() == 16 && txtCVV.getText().length() == 3) {
+                abrirVentanaComprobante();
+                ventanaTarjeta.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor ingrese un número de tarjeta de 16 dígitos y un CVV de 3 dígitos.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         ventanaTarjeta.setVisible(true);
