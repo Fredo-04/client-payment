@@ -16,7 +16,7 @@ public class VentanaProducto extends JFrame {
     private final JButton btnAñadir;
 
     public VentanaProducto() {
-        setTitle("Validación de Producto");
+        setTitle("Validación de Cliente");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -25,17 +25,17 @@ public class VentanaProducto extends JFrame {
         panel.setLayout(new GridLayout(4, 1));
 
         JPanel panelCodigo = new JPanel();
-        panelCodigo.add(new JLabel("Cd. producto: "));
+        panelCodigo.add(new JLabel("Código de Cliente: "));
         txtCodigo = new JTextField(10);
         panelCodigo.add(txtCodigo);
-        btnValidar = new JButton("Validar");
+        btnValidar = new JButton("Comprobar Cliente");
         panelCodigo.add(btnValidar);
         panel.add(panelCodigo);
 
         lblResultado = new JLabel("");
         panel.add(lblResultado);
 
-        btnAñadir = new JButton("Añadir a la compra");
+        btnAñadir = new JButton("Pagar Deuda");
         btnAñadir.setEnabled(false);
         panel.add(btnAñadir);
 
@@ -52,17 +52,19 @@ public class VentanaProducto extends JFrame {
 
     private void validarProducto() {
         String codigo = txtCodigo.getText();
-        if (codigo.matches("\\d{4}")) {
-            lblResultado.setText("<html>Producto: Galleta<br>Estado: Disponible</html>");
+        if (codigo.equals("1234")) {
+            lblResultado.setText("<html>Cliente: Luis<br>Deuda: SI<br>Monto: S/.1299</html>");
             btnAñadir.setEnabled(true);
-        } else {
+        } else if (codigo.length() != 4) {
             lblResultado.setText("Debe ser un número de 4 dígitos");
+            btnAñadir.setEnabled(false);
+        } else {
+            lblResultado.setText("Cliente no encontrado");
             btnAñadir.setEnabled(false);
         }
     }
 
     private void añadirProducto() {
-        // Aquí se añadirá el producto a la tabla y se mostrará la ventana de pago
         VentanaPago ventanaPago = new VentanaPago();
         ventanaPago.setVisible(true);
         this.dispose();

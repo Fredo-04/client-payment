@@ -2,7 +2,6 @@ package sia.teoria;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -63,6 +62,7 @@ public class VentanaPago extends JFrame {
         panel.add(txtCVV);
 
         JButton btnAceptar = new JButton("Aceptar");
+        panel.add(new JLabel());  // Añadir un espacio vacío
         panel.add(btnAceptar);
 
         ventanaTarjeta.add(panel);

@@ -1,7 +1,7 @@
 package sia.teoria;
 
 import java.awt.GridLayout;
-
+import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,8 +25,8 @@ public class VentanaFinal extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-        panel.add(new JLabel("Número de " + tipo + ":"));
-        txtNumeroDocumento = new JTextField(tipo.equals("boleta") ? 8 : 11);
+        panel.add(new JLabel(tipo.equals("factura") ? "Nro de RUC:" : "Nro de DNI:"));
+        txtNumeroDocumento = new JTextField(tipo.equals("factura") ? 11 : 8);
         panel.add(txtNumeroDocumento);
 
         btnGenerar = new JButton("Generar Comprobante");
@@ -35,13 +35,50 @@ public class VentanaFinal extends JFrame {
         add(panel);
 
         // Usando lambda para el ActionListener del botón
-        btnGenerar.addActionListener(e -> generarPDF());
+        btnGenerar.addActionListener(e -> mostrarTablaComprobante());
     }
 
-    private void generarPDF() {
+    private void mostrarTablaComprobante() {
         String numeroDocumento = txtNumeroDocumento.getText();
-        
-        GenerarPDFBox.generar(tipoComprobante, numeroDocumento);
+
+        JFrame ventanaTabla = new JFrame("Comprobante de Pago");
+        ventanaTabla.setSize(400, 300);
+        ventanaTabla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventanaTabla.setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(6, 2));
+
+        panel.add(new JLabel("Tipo de Comprobante:"));
+        panel.add(new JLabel(tipoComprobante.equals("factura") ? "Factura" : "Boleta"));
+
+        panel.add(new JLabel("Nombre:"));
+        panel.add(new JLabel("Luis"));
+
+        panel.add(new JLabel("Número de Documento:"));
+        panel.add(new JLabel(numeroDocumento));
+
+        panel.add(new JLabel("Monto:"));
+        panel.add(new JLabel("S/.1299"));
+
+        panel.add(new JLabel("Fecha:"));
+        panel.add(new JLabel("30/06/2024"));
+
+
+
+        JButton btnImprimir = new JButton("Imprimir");
+        panel.add(btnImprimir);
+
+        ventanaTabla.add(panel);
+        ventanaTabla.setVisible(true);
+
+        btnImprimir.addActionListener(e -> {
+            VentanaProducto ventanaProducto = new VentanaProducto();
+            ventanaProducto.setVisible(true);
+            ventanaTabla.dispose();
+            this.dispose();
+        });
+
         JOptionPane.showMessageDialog(this, "Comprobante generado");
     }
 }

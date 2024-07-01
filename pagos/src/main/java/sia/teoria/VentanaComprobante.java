@@ -1,11 +1,10 @@
 package sia.teoria;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 
 public class VentanaComprobante extends JFrame {
     private final JButton btnBoleta;
